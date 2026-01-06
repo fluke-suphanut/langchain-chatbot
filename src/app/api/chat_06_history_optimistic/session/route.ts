@@ -38,8 +38,9 @@ import { getDatabase } from '@/lib/database'
 export const dynamic = 'force-dynamic'                                     // บังคับให้ response เป็น dynamic
 
 // ===============================================
-// Database Connection Pool Setup - ตั้งค่าการเชื่อมต่อฐานข้อมูล
+// ใช้ centralized database utility
 // ===============================================
+const pool = getDatabase()
 
 // ===============================================
 // GET Method: ดึงรายการ Chat Sessions
@@ -85,7 +86,7 @@ export async function GET(req: NextRequest) {
      * เชื่อมต่อกับ PostgreSQL database
      * ใช้ connection pool เพื่อจัดการ connection อย่างมีประสิทธิภาพ
      */
-    const client = await getDatabase().connect()                            // เชื่อมต่อ database
+    const client = await pool.connect()                                     // เชื่อมต่อ database
     
     try {
       // ===============================================
@@ -298,7 +299,7 @@ export async function POST(req: NextRequest) {
      * เชื่อมต่อกับ PostgreSQL database
      * ใช้ connection pool เพื่อจัดการ connection อย่างมีประสิทธิภาพ
      */
-    const client = await getDatabase().connect()                            // เชื่อมต่อ database
+    const client = await pool.connect()                                     // เชื่อมต่อ database
     
     try {
       // ===============================================
@@ -438,7 +439,7 @@ export async function PUT(req: NextRequest) {
      * เชื่อมต่อกับ PostgreSQL database
      * ใช้ connection pool เพื่อจัดการ connection อย่างมีประสิทธิภาพ
      */
-    const client = await getDatabase().connect()                            // เชื่อมต่อ database
+    const client = await pool.connect()                                     // เชื่อมต่อ database
     
     try {
       // ===============================================
@@ -579,7 +580,7 @@ export async function DELETE(req: NextRequest) {
      * เชื่อมต่อกับ PostgreSQL database
      * ใช้ connection pool เพื่อจัดการ connection อย่างมีประสิทธิภาพ
      */
-    const client = await getDatabase().connect()                            // เชื่อมต่อ database
+    const client = await pool.connect()                                     // เชื่อมต่อ database
     
     try {
       // ===============================================
