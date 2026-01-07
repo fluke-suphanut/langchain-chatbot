@@ -45,10 +45,10 @@ export function LoginForm({ className, ...props }: React.ComponentPropsWithoutRe
   }
 
   // เพิ่มการจัดการ autoComplete ใน handleSubmit
-const handleFillDemo = () => {
-  setEmail('meeyindee.f@gmail.com')
-  setPassword('123456')
-}
+  const handleFillDemo = () => {
+    setEmail('meeyindee.f@gmail.com')
+    setPassword('123456')
+  }
 
   return (
     <div className={cn('flex flex-col gap-6', className)} {...props}>
@@ -67,7 +67,7 @@ const handleFillDemo = () => {
                 variant="outline" 
                 size="sm"
                 onClick={handleFillDemo}
-                className="ml-2 bg-white hover:bg-gray-50"
+                className="ml-2 bg-white hover:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700"
               >
                 Auto Fill
               </Button>
