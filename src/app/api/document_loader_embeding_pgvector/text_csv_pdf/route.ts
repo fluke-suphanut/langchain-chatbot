@@ -74,10 +74,10 @@ export async function GET() {
     // ===============================================
     const rawDocs = await new DirectoryLoader("./data", {
         ".txt": (path) => new TextLoader(path),
-        // ".csv": (path) => new CSVLoader(path, {
-        //   column: undefined, // โหลดทุกคอลัมน์
-        //   separator: ",",    // ใช้ comma เป็นตัวแบ่ง
-        // }),
+        ".csv": (path) => new CSVLoader(path, {
+          column: undefined, // โหลดทุกคอลัมน์
+          separator: ",",    // ใช้ comma เป็นตัวแบ่ง
+        }),
         ".pdf": (path) => new PDFLoader(path, {
           splitPages: false, // ไม่แยกหน้า ให้เป็น document เดียว
           parsedItemSeparator: "\n" // ใช้ \n เป็นตัวแบ่งระหว่าง parsed items
@@ -138,7 +138,7 @@ export async function GET() {
       
       // ไฟล์อื่นๆ ใช้ข้อความต้นฉบับ
       return doc;
-    });
+    })
     
     // แสดงตัวอย่างข้อความหลังการแก้ไข
     if (processedDocs.length > 0) {
@@ -168,20 +168,20 @@ export async function GET() {
     const chunks = await splitter.splitDocuments(processedDocs);
     console.log(`✂️ แยกเอกสารเป็น ${chunks.length} ชิ้น`)
 
-     // ===============================================
+    // ===============================================
     // ✅ เพิ่มโค้ดส่วนนี้เพื่อทดสอบ ✅
     // ===============================================
     // console.log("\n--- 🧐 ตัวอย่าง 3 Chunks แรก ---")
     
-    // // ใช้ slice(0, 3) เพื่อเลือกมาแค่ 3 chunks แรก
+    // ใช้ slice(0, 3) เพื่อเลือกมาแค่ 3 chunks แรก
     // chunks.slice(0, 3).forEach((chunk, index) => {
     //     console.log(`\n--- Chunk ${index + 1} ---`)
     //     console.log("เนื้อหา (Content):", chunk.pageContent)
     //     console.log("ขนาด (Size):", chunk.pageContent.length)
     //     console.log("ข้อมูลอ้างอิง (Metadata):", chunk.metadata)
     //     console.log("---------------------\n")
-    // });
-    // // ===============================================
+    // })
+    // ===============================================
 
     // return NextResponse.json({ 
     //   message: `โหลดเอกสาร ${rawDocs.length} ไฟล์ และแยกเป็น ${chunks.length} ชิ้นสำเร็จ`,
